@@ -200,7 +200,7 @@ static struct mxl58x_cfg stavix_mxl58x_cfg = {
 
 static struct stid135_cfg stavix_stid135_cfg = {
 	.adr		= 0x68,
-	.clk		= 25,
+	.clk		= 27,
 	.ts_mode	= TS_STFE,
 	.set_voltage	= max_set_voltage,
 	.write_properties = stavix_spi_write, 
