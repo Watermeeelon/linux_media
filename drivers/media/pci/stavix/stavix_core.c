@@ -230,6 +230,8 @@ static int stavix_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		dev->msi = false;
 	}
 
+	pci_write(STAVIX_GPIO_LED_BASE, STAVIX_GPIO_TRI, 0x00000000);
+	pci_write(STAVIX_GPIO_LED_BASE, STAVIX_GPIO_DATA, 0x00000000);
 
 	pci_write(STAVIX_GPIO_BASE, STAVIX_GPIO_TRI, 0x00000000);
 	pci_write(STAVIX_GPIO_BASE, STAVIX_GPIO_DATA, 0x00000000); 
@@ -252,6 +254,8 @@ static int stavix_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 		adapter->dma.tasklet_on = false;
 		sg_dma_enable_tasklet(adapter);
 	}
+	
+	pci_write(STAVIX_GPIO_LED_BASE, STAVIX_GPIO_DATA, 0x000000001);
 
 	return 0;
 
@@ -280,6 +284,7 @@ err1:
 err0:
 	pci_disable_device(pdev);
 	dev_err(&pdev->dev, "probe error\n");
+	pci_write(STAVIX_GPIO_LED_BASE, STAVIX_GPIO_DATA, 0x000000010);
 	return ret;
 }
 

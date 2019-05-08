@@ -24,7 +24,7 @@
 
 
 #define STAVIX_GPIO_BASE	0x00010000
-#define STAVIX_RESETN_BASE2	0x00050000
+#define STAVIX_GPIO_LED_BASE	0x00050000
 
 					
 #define STAVIX_GPIO_PIN(_bank, _pin)	BIT(_bank*2+_pin) 
