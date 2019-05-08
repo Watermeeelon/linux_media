@@ -331,7 +331,7 @@ static int stid135_set_parameters(struct dvb_frontend *fe)
 		return -1;
 	}
 
-	mutex_lock(&state->status_lock);
+	//mutex_lock(&state->status_lock);
 	if (search_results.locked)
 		dev_warn(&state->base->i2c->dev, "%s: locked !\n", __func__);
 	else {
@@ -350,7 +350,7 @@ static int stid135_set_parameters(struct dvb_frontend *fe)
 	if (err != FE_LLA_NO_ERROR)
 		dev_err(&state->base->i2c->dev, "%s: fe_stid135_set_mis_filtering error %d !\n", __func__, err);
 
-	mutex_unlock(&state->status_lock);
+	//mutex_unlock(&state->status_lock);
 	return err != FE_LLA_NO_ERROR ? -1 : 0;
 
 }
@@ -848,7 +848,6 @@ struct dvb_frontend *stid135_attach(struct i2c_adapter *i2c,
 	if (base) {
 		base->count++;
 		state->base = base;
-		mutex_init(&state->status_lock);
 	} else {
 		base = kzalloc(sizeof(struct stv_base), GFP_KERNEL);
 		if (!base)
@@ -864,6 +863,7 @@ struct dvb_frontend *stid135_attach(struct i2c_adapter *i2c,
 		base->read_properties = cfg->read_properties;
 
 		mutex_init(&base->i2c_lock);
+		mutex_init(&state->status_lock);
 
 		state->base = base;
 		if (stid135_probe(state) < 0) {
