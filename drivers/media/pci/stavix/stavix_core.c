@@ -292,7 +292,8 @@ static void stavix_remove(struct pci_dev *pdev)
 {
 	struct stavix_dev *dev = pci_get_drvdata(pdev);
 
-	pci_write(STAVIX_INT_BASE, STAVIX_INT_MER, 0x0); 
+	pci_write(STAVIX_INT_BASE, STAVIX_INT_MER, 0x0);
+	pci_write(STAVIX_GPIO_LED_BASE, STAVIX_GPIO_DATA, 0x000000000); 
 	free_irq(pdev->irq, dev);
 	if (dev->msi) {
 		pci_disable_msi(pdev);
