@@ -656,7 +656,7 @@ static int stid135_send_master_cmd(struct dvb_frontend *fe,
 	struct stv *state = fe->demodulator_priv;
 	fe_lla_error_t err = FE_LLA_NO_ERROR;
 
-	if (state->base->mode == 0)
+	if (state->base->mode == 1)
 		return 0;
 
 	mutex_lock(&state->status_lock);
@@ -676,7 +676,7 @@ static int stid135_recv_slave_reply(struct dvb_frontend *fe,
 	struct stv *state = fe->demodulator_priv;
 	fe_lla_error_t err = FE_LLA_NO_ERROR;
 
-	if (state->base->mode == 0)
+	if (state->base->mode == 1)
 		return 0;
 
 	mutex_lock(&state->status_lock);
@@ -694,7 +694,7 @@ static int stid135_send_burst(struct dvb_frontend *fe, enum fe_sec_mini_cmd burs
 	struct stv *state = fe->demodulator_priv;
 	fe_lla_error_t err = FE_LLA_NO_ERROR;
 
-	if (state->base->mode == 0)
+	if (state->base->mode == 1)
 		return 0;
 
 	return err != FE_LLA_NO_ERROR ? -1 : 0;
