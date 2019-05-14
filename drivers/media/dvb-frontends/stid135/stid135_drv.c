@@ -3018,7 +3018,7 @@ fe_lla_error_t fe_stid135_get_signal_info(fe_stid135_handle_t Handle,
 			 error |= FE_STiD135_GetViterbiPunctureRate(
 				pParams->handle_demod,Demod, &(pInfo->puncture_rate));
 				
-			error = error | fe_stid135_get_mode_code(pParams,
+			error |= fe_stid135_get_mode_code(pParams,
 						Demod,
 						&pInfo->modcode, 
 						&pInfo->frame_length, 
