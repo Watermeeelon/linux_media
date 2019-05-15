@@ -649,10 +649,10 @@ static int stid135_send_master_cmd(struct dvb_frontend *fe,
 {
 	struct stv *state = fe->demodulator_priv;
 	fe_lla_error_t err = FE_LLA_NO_ERROR;
-
+/*
 	if (state->base->mode == 1)
 		return 0;
-
+*/
 	mutex_lock(&state->base->status_lock);
 	err |= fe_stid135_diseqc_init(state->base->handle, state->rf_in + 1, FE_SAT_DISEQC_2_3_PWM);
 	err |= fe_stid135_diseqc_send(state->base->handle, state->rf_in + 1, cmd->msg, cmd->msg_len);
@@ -669,10 +669,10 @@ static int stid135_recv_slave_reply(struct dvb_frontend *fe,
 {
 	struct stv *state = fe->demodulator_priv;
 	fe_lla_error_t err = FE_LLA_NO_ERROR;
-
+/*
 	if (state->base->mode == 1)
 		return 0;
-
+*/
 	mutex_lock(&state->base->status_lock);
 	err = fe_stid135_diseqc_receive(state->base->handle, reply->msg, &reply->msg_len);
 	mutex_unlock(&state->base->status_lock);
@@ -687,10 +687,10 @@ static int stid135_send_burst(struct dvb_frontend *fe, enum fe_sec_mini_cmd burs
 {
 	struct stv *state = fe->demodulator_priv;
 	fe_lla_error_t err = FE_LLA_NO_ERROR;
-
+/*
 	if (state->base->mode == 1)
 		return 0;
-
+*/
 	return err != FE_LLA_NO_ERROR ? -1 : 0;
 }
 
