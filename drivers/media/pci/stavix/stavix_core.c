@@ -284,7 +284,7 @@ err1:
 err0:
 	pci_disable_device(pdev);
 	dev_err(&pdev->dev, "probe error\n");
-	pci_write(STAVIX_GPIO_LED_BASE, STAVIX_GPIO_DATA, 0x000000003);
+	pci_write(STAVIX_GPIO_LED_BASE, STAVIX_GPIO_DATA, 0x000000002);
 	return ret;
 }
 
