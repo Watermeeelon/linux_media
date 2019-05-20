@@ -283,10 +283,9 @@ static int stid135_set_parameters(struct dvb_frontend *fe)
 	search_params.iq_inversion	= FE_SAT_IQ_AUTO;
 	search_params.tuner_index_jump	= 0; // ok with narrow band signal
 
+	mutex_lock(&state->base->status_lock);
 	err = FE_STiD135_GetLoFreqHz(state->base->handle, &(search_params.lo_frequency));
 	search_params.lo_frequency *= 1000000;
-
-	mutex_lock(&state->base->status_lock);
 
 	dev_dbg(&state->base->i2c->dev, "%s: demod %d + tuner %d\n", __func__, state->nr, state->rf_in);
 	err |= fe_stid135_set_rfmux_path(p_params->handle_demod, state->nr + 1, state->rf_in + 1);
