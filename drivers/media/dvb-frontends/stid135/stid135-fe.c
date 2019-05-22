@@ -197,7 +197,16 @@ static int stid135_probe(struct stv *state)
 			state->base->set_voltage(state->base->i2c, SEC_VOLTAGE_18, 3);
 		}
 	}
-
+	else{
+		err |= fe_stid135_tuner_enable(p_params->handle_demod, AFE_TUNER1);
+		err |= fe_stid135_tuner_enable(p_params->handle_demod, AFE_TUNER2);
+		err |= fe_stid135_tuner_enable(p_params->handle_demod, AFE_TUNER3);
+		err |= fe_stid135_tuner_enable(p_params->handle_demod, AFE_TUNER4);
+		err |= fe_stid135_diseqc_init(state->base->handle,AFE_TUNER1, FE_SAT_DISEQC_2_3_PWM);
+		err |= fe_stid135_diseqc_init(state->base->handle,AFE_TUNER2, FE_SAT_DISEQC_2_3_PWM);
+		err |= fe_stid135_diseqc_init(state->base->handle,AFE_TUNER3, FE_SAT_DISEQC_2_3_PWM);
+		err |= fe_stid135_diseqc_init(state->base->handle,AFE_TUNER4, FE_SAT_DISEQC_2_3_PWM);
+	}
 	if (err != FE_LLA_NO_ERROR)
 		dev_err(&state->base->i2c->dev, "%s: setup error %d !\n", __func__, err);
 
@@ -209,7 +218,7 @@ static int stid135_init(struct dvb_frontend *fe)
 	struct stv *state = fe->demodulator_priv;
 	fe_lla_error_t err = FE_LLA_NO_ERROR;
 	struct fe_stid135_internal_param *p_params = state->base->handle;
-
+/*
 	if (state->base->mode == 0)
 		return 0;
 
@@ -223,7 +232,7 @@ static int stid135_init(struct dvb_frontend *fe)
 
 	if (err != FE_LLA_NO_ERROR)
 		dev_err(&state->base->i2c->dev, "%s: enable tuner %d + demod %d error %d !\n", __func__, state->rf_in, state->nr, err);
-
+*/
 	return err != FE_LLA_NO_ERROR ? -1 : 0;
 }
 
